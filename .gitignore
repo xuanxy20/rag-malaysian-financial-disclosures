@@ -26,6 +26,9 @@ chapter*_draft.md
 references_apa.md
 pipeline_flowchart.md
 
+# This file
+.gitignore
+
 # macOS
 .DS_Store
 
