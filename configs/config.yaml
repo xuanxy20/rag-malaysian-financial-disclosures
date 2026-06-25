@@ -1,0 +1,190 @@
+# ============================================================
+# Central Configuration — RAG Research Pipeline
+# Thesis: Optimizing RAG for Malaysian Financial Disclosures
+# All pipeline parameters live here. Nothing is hardcoded.
+# ============================================================
+
+
+# ------------------------------------------------------------
+# Paths  (all relative to project root)
+# ------------------------------------------------------------
+paths:
+  raw_data:          "data/raw"
+  processed_path_a:  "data/processed/path_a"
+  processed_path_b:  "data/processed/path_b"
+  results_path_a:    "results/path_a"
+  results_path_b:    "results/path_b"
+  results_path_c:    "results/path_c"
+  reports:           "results/reports"
+  eval_questions:    "questions/eval_questions.json"
+
+
+# ------------------------------------------------------------
+# Source PDFs
+# Each entry may be a .pdf file or a folder containing PDFs.
+# The extractors will handle both cases.
+# ------------------------------------------------------------
+documents:
+  - name: "CIMB-2025"
+    file: "info_iar_cimb_2025.pdf"
+  - name: "PBB-2025"
+    file: "info_fs_pbb_2025.pdf"
+  - name: "GENT-2025"
+    file: "info_iar_genting_2025.pdf"
+  - name: "NEST-2025"
+    file: "text_fs_nestle_2025.pdf"
+  - name: "KPJ-2025"
+    file: "info_iar_kpjhb_2025.pdf"
+  - name: "KPJ-Q3-2025"
+    file: "text_fs_kpjhb_2025.pdf"
+  - name: "IHH-2025"
+    file: "info_iar_ihh_2025.pdf"
+  - name: "SDG-2025"
+    file: "info_iar_sime_darby_2025.pdf"
+  - name: "BURSA-2025"
+    file: "info_iar_bursa_2025.pdf"
+  - name: "99SMART-2025"
+    file: "info_iar_99speedmart_2025.pdf"
+  - name: "OKOPI-2025"
+    file: "info_iar_oriental_kopi_2025.pdf"
+  - name: "TNB-2025"
+    file: "info_iar_tnb_2025.pdf"
+  - name: "YTLP-2025"
+    file: "info_iar_ytl_power_2025.pdf"
+  - name: "PADINI-2025"
+    file: "info_iar_padini_2025.pdf"
+
+
+# ------------------------------------------------------------
+# Path A — Baseline Extraction
+# ------------------------------------------------------------
+path_a:
+  extraction:
+    primary_engine:  "pymupdf"         # fitz backend
+    fallback_engine: "pdfplumber"      # used if PyMuPDF yields < min_chars chars
+    min_chars:       100               # page char threshold to trigger fallback
+    skip_scanned:    false             # if true, skip pages with no extractable text
+                                       # set false so scanned pages are flagged, not silently dropped
+
+  chunking:
+    strategy:        "fixed_token"
+    chunk_size:      300               # target tokens per chunk
+    chunk_overlap:   50                # overlap tokens between consecutive chunks
+    tokenizer:       "cl100k_base"     # tiktoken encoding (matches GPT-4 tokenizer)
+
+
+# ------------------------------------------------------------
+# Path B — Layout-Aware Extraction
+# ------------------------------------------------------------
+path_b:
+  extraction:
+    engine:          "llamaparse"
+    result_type:     "markdown"        # request markdown output from LlamaParse
+    language:        "en"
+    # API key loaded from .env (LLAMA_CLOUD_API_KEY) — not stored here
+    output_format:   "json"            # save parsed output as .json per document
+
+  chunking:
+    strategy:        "structural"
+    # Structural chunker respects LlamaParse section/heading/table boundaries.
+    # max_chunk_tokens caps oversized sections; min_chunk_tokens merges tiny ones.
+    max_chunk_tokens: 400              # hard cap — split sections larger than this
+    min_chunk_tokens: 100              # merge chunks smaller than this with next (raised from 50)
+    tokenizer:        "cl100k_base"    # same tokenizer as Path A for fair comparison
+    preserve_tables:  true             # keep table blocks intact (no mid-table splits)
+    max_table_tokens: 600              # hard cap for tables — large tables split by row groups
+
+  retrieval:
+    top_k: 10                          # higher than global top_k=5 to capture multi-metric questions
+
+
+# ------------------------------------------------------------
+# Path C — Hybrid Retrieval (BM25 + Dense + Cross-Encoder Reranking)
+# Reuses Path B's LlamaParse extraction and structural chunks.
+# No re-extraction, re-chunking, or re-embedding needed.
+# ------------------------------------------------------------
+path_c:
+  retrieval:
+    top_k_dense:    20          # FAISS candidates before reranking
+    top_k_bm25:     20          # BM25 candidates before reranking
+    top_k_final:    10          # results after reranking passed to generator
+    dense_weight:   0.7         # weight for normalised dense score in hybrid merge
+    bm25_weight:    0.3         # weight for normalised BM25 score in hybrid merge
+    reranker_model: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+
+
+# ------------------------------------------------------------
+# Embeddings  (shared — identical for both paths)
+# ------------------------------------------------------------
+embeddings:
+  model_name:   "sentence-transformers/all-MiniLM-L6-v2"
+  device:       "mps"                  # Apple Silicon GPU (M4 Pro)
+  batch_size:   64
+  normalize:    true                   # L2-normalize vectors before storing in FAISS
+
+
+# ------------------------------------------------------------
+# Vector Store  (shared)
+# ------------------------------------------------------------
+vectorstore:
+  engine:        "faiss"
+  index_type:    "IndexFlatIP"         # inner product on normalized vectors = cosine sim
+  # Index files saved as:
+  #   data/processed/path_a/<doc_name>.faiss + <doc_name>.meta.json
+  #   data/processed/path_b/<doc_name>.faiss + <doc_name>.meta.json
+
+
+# ------------------------------------------------------------
+# Retrieval  (shared)
+# ------------------------------------------------------------
+retrieval:
+  top_k:         5                     # number of chunks returned per query
+  similarity:    "cosine"              # enforced by L2-normalizing + IndexFlatIP
+
+
+# ------------------------------------------------------------
+# Generation  (shared)
+# ------------------------------------------------------------
+generation:
+  engine:        "ollama"
+  base_url:      "http://127.0.0.1:11434"
+  model:         "llama3.1:8b"
+  temperature:   0.0                   # deterministic output for reproducibility
+  max_tokens:    512
+  # Fixed prompt template — identical for both paths (research requirement).
+  # {context} and {question} are filled at runtime.
+  prompt_template: |
+    You are a financial analyst assistant. Answer the question using ONLY the
+    information provided in the context below. If the answer is not in the
+    context, say "I cannot find this information in the provided documents."
+
+    Context:
+    {context}
+
+    Question: {question}
+
+    Answer:
+
+
+# ------------------------------------------------------------
+# Evaluation  (shared)
+# ------------------------------------------------------------
+evaluation:
+  metrics:
+    - "context_precision"
+    - "context_recall"
+    - "faithfulness"
+    - "answer_relevancy"
+  # RAGAS requires an LLM judge. We reuse the same Ollama model.
+  judge_model:   "llama3.1:8b"
+  judge_base_url: "http://127.0.0.1:11434"
+  batch_size:    5                     # number of QA pairs evaluated per RAGAS batch
+
+
+# ------------------------------------------------------------
+# Logging
+# ------------------------------------------------------------
+logging:
+  level:   "INFO"                      # DEBUG | INFO | WARNING | ERROR
+  format:  "%(asctime)s [%(levelname)s] %(name)s — %(message)s"
+  datefmt: "%Y-%m-%d %H:%M:%S"

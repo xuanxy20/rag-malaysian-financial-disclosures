@@ -1,0 +1,55 @@
+{
+  "metrics": {
+    "context_precision": {
+      "means": {
+        "path_a": 0.840833,
+        "path_b": 0.790047,
+        "path_c": 0.877034
+      },
+      "winner": "path_c",
+      "path_a_mean": 0.840833,
+      "path_b_mean": 0.790047,
+      "path_c_mean": 0.877034
+    },
+    "context_recall": {
+      "means": {
+        "path_a": 0.615476,
+        "path_b": 0.619881,
+        "path_c": 0.702857
+      },
+      "winner": "path_c",
+      "path_a_mean": 0.615476,
+      "path_b_mean": 0.619881,
+      "path_c_mean": 0.702857
+    },
+    "faithfulness": {
+      "means": {
+        "path_a": 0.636438,
+        "path_b": 0.646472,
+        "path_c": 0.726625
+      },
+      "winner": "path_c",
+      "path_a_mean": 0.636438,
+      "path_b_mean": 0.646472,
+      "path_c_mean": 0.726625
+    },
+    "answer_relevancy": {
+      "means": {
+        "path_a": 0.38621,
+        "path_b": 0.50497,
+        "path_c": 0.53374
+      },
+      "winner": "path_c",
+      "path_a_mean": 0.38621,
+      "path_b_mean": 0.50497,
+      "path_c_mean": 0.53374
+    }
+  },
+  "overall_winner": "path_c",
+  "wins": {
+    "path_a": 0,
+    "path_b": 0,
+    "path_c": 4
+  },
+  "ties": 0
+}

@@ -1,0 +1,42 @@
+# ============================================================
+# RAG Research Pipeline — Dependency Manifest
+# Thesis: Optimizing RAG for Malaysian Financial Disclosures
+# Python 3.11 | conda env: rag-fin
+# ============================================================
+
+# --- PDF Extraction (Path A) ---
+pymupdf==1.24.5               # primary extractor (fitz)
+pdfplumber==0.11.4            # fallback extractor for Path A
+
+# --- Layout-Aware Extraction (Path B) ---
+llama-parse==0.5.14           # LlamaParse cloud API client
+
+# --- Chunking ---
+tiktoken==0.7.0               # token counting for fixed chunker (Path A)
+
+# --- Embeddings ---
+sentence-transformers==3.0.1  # all-MiniLM-L6-v2, fully local
+
+# --- Vector Store ---
+faiss-cpu==1.8.0              # local FAISS index
+
+# --- LLM (Ollama client) ---
+ollama==0.3.3                 # Python client for local Ollama server
+
+# --- Evaluation ---
+ragas==0.1.21                 # RAGAS metrics: precision, recall, faithfulness, relevancy
+datasets==2.20.0              # required by ragas for dataset handling
+langchain-ollama==0.1.3       # LangChain wrapper for Ollama — used as RAGAS judge LLM
+langchain-huggingface==0.0.3  # LangChain wrapper for HuggingFace embeddings in RAGAS
+
+# --- Config & Environment ---
+pyyaml==6.0.2                 # parse configs/config.yaml
+python-dotenv==1.0.1          # load LLAMA_CLOUD_API_KEY from .env
+
+# --- Utilities ---
+tqdm==4.66.4                  # progress bars
+numpy==1.26.4                 # array ops (pinned for faiss compatibility)
+pandas==2.2.2                 # results/report tabulation
+
+# --- Logging / CLI ---
+rich==13.7.1                  # optional: prettier log output (used in run_pipeline.py)

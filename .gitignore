@@ -1,0 +1,34 @@
+# PDF source documents (copyright — do not publish)
+data/raw/
+
+# Processed/chunked data (regenerable from source)
+data/processed/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment / secrets
+.env
+.venv
+venv/
+env/
+
+# Session memory / internal notes
+memory_*.md
+presentforclaude.md
+presentforclaude.pdf
+questions/eval_questions_ragas.csv
+
+# Thesis chapter drafts (not part of codebase)
+chapter*_draft.md
+references_apa.md
+pipeline_flowchart.md
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

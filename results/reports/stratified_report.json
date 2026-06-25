@@ -1,0 +1,447 @@
+{
+  "layout_sensitivity": {
+    "high": {
+      "n": 25,
+      "metrics": {
+        "context_precision": {
+          "means": {
+            "path_a": 0.898833,
+            "path_b": 0.828613,
+            "path_c": 0.889774
+          },
+          "winner": "path_a",
+          "path_a_mean": 0.898833,
+          "path_b_mean": 0.828613,
+          "path_c_mean": 0.889774
+        },
+        "context_recall": {
+          "means": {
+            "path_a": 0.643238,
+            "path_b": 0.628524,
+            "path_c": 0.706762
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.643238,
+          "path_b_mean": 0.628524,
+          "path_c_mean": 0.706762
+        },
+        "faithfulness": {
+          "means": {
+            "path_a": 0.640873,
+            "path_b": 0.670968,
+            "path_c": 0.701804
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.640873,
+          "path_b_mean": 0.670968,
+          "path_c_mean": 0.701804
+        },
+        "answer_relevancy": {
+          "means": {
+            "path_a": 0.423933,
+            "path_b": 0.520818,
+            "path_c": 0.545277
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.423933,
+          "path_b_mean": 0.520818,
+          "path_c_mean": 0.545277
+        }
+      }
+    },
+    "low": {
+      "n": 1,
+      "metrics": {
+        "context_precision": {
+          "means": {
+            "path_a": 0.804167,
+            "path_b": 1.0,
+            "path_c": 1.0
+          },
+          "winner": "tie",
+          "path_a_mean": 0.804167,
+          "path_b_mean": 1.0,
+          "path_c_mean": 1.0
+        },
+        "context_recall": {
+          "means": {
+            "path_a": 0.8,
+            "path_b": 0.8,
+            "path_c": 0.25
+          },
+          "winner": "tie",
+          "path_a_mean": 0.8,
+          "path_b_mean": 0.8,
+          "path_c_mean": 0.25
+        },
+        "faithfulness": {
+          "means": {
+            "path_a": 0.25,
+            "path_b": 0.25,
+            "path_c": null
+          },
+          "winner": "tie",
+          "path_a_mean": 0.25,
+          "path_b_mean": 0.25,
+          "path_c_mean": null
+        },
+        "answer_relevancy": {
+          "means": {
+            "path_a": 0.627343,
+            "path_b": 0.678809,
+            "path_c": 0.0
+          },
+          "winner": "path_b",
+          "path_a_mean": 0.627343,
+          "path_b_mean": 0.678809,
+          "path_c_mean": 0.0
+        }
+      }
+    },
+    "medium": {
+      "n": 4,
+      "metrics": {
+        "context_precision": {
+          "means": {
+            "path_a": 0.4875,
+            "path_b": 0.496528,
+            "path_c": 0.766667
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.4875,
+          "path_b_mean": 0.496528,
+          "path_c_mean": 0.766667
+        },
+        "context_recall": {
+          "means": {
+            "path_a": 0.395833,
+            "path_b": 0.520833,
+            "path_c": 0.791667
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.395833,
+          "path_b_mean": 0.520833,
+          "path_c_mean": 0.791667
+        },
+        "faithfulness": {
+          "means": {
+            "path_a": 0.798611,
+            "path_b": 0.7,
+            "path_c": 0.875556
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.798611,
+          "path_b_mean": 0.7,
+          "path_c_mean": 0.875556
+        },
+        "answer_relevancy": {
+          "means": {
+            "path_a": 0.090156,
+            "path_b": 0.362458,
+            "path_c": 0.595071
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.090156,
+          "path_b_mean": 0.362458,
+          "path_c_mean": 0.595071
+        }
+      }
+    }
+  },
+  "question_type": {
+    "FIN": {
+      "n": 18,
+      "metrics": {
+        "context_precision": {
+          "means": {
+            "path_a": 0.887269,
+            "path_b": 0.825405,
+            "path_c": 0.941757
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.887269,
+          "path_b_mean": 0.825405,
+          "path_c_mean": 0.941757
+        },
+        "context_recall": {
+          "means": {
+            "path_a": 0.624074,
+            "path_b": 0.593981,
+            "path_c": 0.666667
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.624074,
+          "path_b_mean": 0.593981,
+          "path_c_mean": 0.666667
+        },
+        "faithfulness": {
+          "means": {
+            "path_a": 0.57284,
+            "path_b": 0.594245,
+            "path_c": 0.645702
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.57284,
+          "path_b_mean": 0.594245,
+          "path_c_mean": 0.645702
+        },
+        "answer_relevancy": {
+          "means": {
+            "path_a": 0.27119,
+            "path_b": 0.53316,
+            "path_c": 0.476088
+          },
+          "winner": "path_b",
+          "path_a_mean": 0.27119,
+          "path_b_mean": 0.53316,
+          "path_c_mean": 0.476088
+        }
+      }
+    },
+    "GOV": {
+      "n": 3,
+      "metrics": {
+        "context_precision": {
+          "means": {
+            "path_a": 0.983333,
+            "path_b": 0.903208,
+            "path_c": 0.781316
+          },
+          "winner": "path_a",
+          "path_a_mean": 0.983333,
+          "path_b_mean": 0.903208,
+          "path_c_mean": 0.781316
+        },
+        "context_recall": {
+          "means": {
+            "path_a": 0.866667,
+            "path_b": 0.869048,
+            "path_c": 0.77381
+          },
+          "winner": "path_b",
+          "path_a_mean": 0.866667,
+          "path_b_mean": 0.869048,
+          "path_c_mean": 0.77381
+        },
+        "faithfulness": {
+          "means": {
+            "path_a": 0.715278,
+            "path_b": 0.75,
+            "path_c": 0.875
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.715278,
+          "path_b_mean": 0.75,
+          "path_c_mean": 0.875
+        },
+        "answer_relevancy": {
+          "means": {
+            "path_a": 0.505239,
+            "path_b": 0.658802,
+            "path_c": 0.791091
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.505239,
+          "path_b_mean": 0.658802,
+          "path_c_mean": 0.791091
+        }
+      }
+    },
+    "OPS": {
+      "n": 4,
+      "metrics": {
+        "context_precision": {
+          "means": {
+            "path_a": 0.951042,
+            "path_b": 0.898683,
+            "path_c": 0.951775
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.951042,
+          "path_b_mean": 0.898683,
+          "path_c_mean": 0.951775
+        },
+        "context_recall": {
+          "means": {
+            "path_a": 0.75,
+            "path_b": 0.791667,
+            "path_c": 0.825
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.75,
+          "path_b_mean": 0.791667,
+          "path_c_mean": 0.825
+        },
+        "faithfulness": {
+          "means": {
+            "path_a": 0.85,
+            "path_b": 0.581781,
+            "path_c": 0.846429
+          },
+          "winner": "path_a",
+          "path_a_mean": 0.85,
+          "path_b_mean": 0.581781,
+          "path_c_mean": 0.846429
+        },
+        "answer_relevancy": {
+          "means": {
+            "path_a": 0.788375,
+            "path_b": 0.329048,
+            "path_c": 0.432774
+          },
+          "winner": "path_a",
+          "path_a_mean": 0.788375,
+          "path_b_mean": 0.329048,
+          "path_c_mean": 0.432774
+        }
+      }
+    },
+    "REG": {
+      "n": 1,
+      "metrics": {
+        "context_precision": {
+          "means": {
+            "path_a": 1.0,
+            "path_b": 1.0,
+            "path_c": 1.0
+          },
+          "winner": "tie",
+          "path_a_mean": 1.0,
+          "path_b_mean": 1.0,
+          "path_c_mean": 1.0
+        },
+        "context_recall": {
+          "means": {
+            "path_a": 0.714286,
+            "path_b": 0.714286,
+            "path_c": 0.714286
+          },
+          "winner": "tie",
+          "path_a_mean": 0.714286,
+          "path_b_mean": 0.714286,
+          "path_c_mean": 0.714286
+        },
+        "faithfulness": {
+          "means": {
+            "path_a": 0.833333,
+            "path_b": 1.0,
+            "path_c": 0.833333
+          },
+          "winner": "path_b",
+          "path_a_mean": 0.833333,
+          "path_b_mean": 1.0,
+          "path_c_mean": 0.833333
+        },
+        "answer_relevancy": {
+          "means": {
+            "path_a": 0.797575,
+            "path_b": 0.346013,
+            "path_c": 0.552622
+          },
+          "winner": "path_a",
+          "path_a_mean": 0.797575,
+          "path_b_mean": 0.346013,
+          "path_c_mean": 0.552622
+        }
+      }
+    },
+    "RISK": {
+      "n": 2,
+      "metrics": {
+        "context_precision": {
+          "means": {
+            "path_a": 0.25,
+            "path_b": 0.457986,
+            "path_c": 0.573611
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.25,
+          "path_b_mean": 0.457986,
+          "path_c_mean": 0.573611
+        },
+        "context_recall": {
+          "means": {
+            "path_a": 0.0,
+            "path_b": 0.125,
+            "path_c": 0.75
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.0,
+          "path_b_mean": 0.125,
+          "path_c_mean": 0.75
+        },
+        "faithfulness": {
+          "means": {
+            "path_a": 0.0,
+            "path_b": 0.5,
+            "path_c": 0.666667
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.0,
+          "path_b_mean": 0.5,
+          "path_c_mean": 0.666667
+        },
+        "answer_relevancy": {
+          "means": {
+            "path_a": 0.0,
+            "path_b": 0.186852,
+            "path_c": 0.643588
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.0,
+          "path_b_mean": 0.186852,
+          "path_c_mean": 0.643588
+        }
+      }
+    },
+    "SUS": {
+      "n": 2,
+      "metrics": {
+        "context_precision": {
+          "means": {
+            "path_a": 0.5,
+            "path_b": 0.311905,
+            "path_c": 0.530556
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.5,
+          "path_b_mean": 0.311905,
+          "path_c_mean": 0.530556
+        },
+        "context_recall": {
+          "means": {
+            "path_a": 0.458333,
+            "path_b": 0.583333,
+            "path_c": 0.625
+          },
+          "winner": "path_c",
+          "path_a_mean": 0.458333,
+          "path_b_mean": 0.583333,
+          "path_c_mean": 0.625
+        },
+        "faithfulness": {
+          "means": {
+            "path_a": null,
+            "path_b": 1.0,
+            "path_c": null
+          },
+          "winner": null,
+          "path_a_mean": null,
+          "path_b_mean": 1.0,
+          "path_c_mean": null
+        },
+        "answer_relevancy": {
+          "means": {
+            "path_a": 0.619044,
+            "path_b": 0.769947,
+            "path_c": 0.749222
+          },
+          "winner": "path_b",
+          "path_a_mean": 0.619044,
+          "path_b_mean": 0.769947,
+          "path_c_mean": 0.749222
+        }
+      }
+    }
+  }
+}
